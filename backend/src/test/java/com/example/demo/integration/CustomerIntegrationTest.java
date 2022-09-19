@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -61,6 +62,7 @@ public class CustomerIntegrationTest {
         createTestCustomer("Rob", "Lowe", "Test2");
         mvc.perform(get("/customers?search=Doe")
                 .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -72,8 +74,9 @@ public class CustomerIntegrationTest {
     public void testSortCustomers() throws Exception {
         createTestCustomer("John", "Doe", "Test");
         createTestCustomer("Rob", "Lowe", "Test2");
-        mvc.perform(get("/customers?sortBy=lastName&sortDir=desc")
+        mvc.perform(get("/customers?sortBy=lastNme&sortDir=desc")
                 .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

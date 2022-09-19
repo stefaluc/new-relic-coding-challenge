@@ -33,8 +33,8 @@ public class CustomerService {
     }
 
     public List<Customer> sortCustomers(String sortBy, String sortDir) {
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
-                : Sort.by(sortBy).descending();
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.DESC.name()) ? Sort.by(sortBy).descending()
+                : Sort.by(sortBy).ascending();
         return customerRepository.findAll(sort);
     }
 
