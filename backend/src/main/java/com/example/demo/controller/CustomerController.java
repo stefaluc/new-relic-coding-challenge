@@ -21,9 +21,22 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/customers")
+    @GetMapping(value = "/customers", params = {"!search", "!sortBy", "!sortDir"})
     List<Customer> getCustomers() {
         return customerService.getCustomers();
+    }
+
+    @GetMapping(value = "/customers", params = "search")
+    List<Customer> searchCustomers(@RequestParam("search") String search) {
+        return customerService.searchCustomers(search);
+    }
+
+    @GetMapping(value = "/customers", params = {"sortBy", "sortDir"})
+    List<Customer> sortCustomers(
+            @RequestParam("sortBy") String sortBy,
+            @RequestParam("sortDir") String sortDir
+    ) {
+        return customerService.sortCustomers(sortBy, sortDir);
     }
 
     @PostMapping("/customers/seedDb")

@@ -1,5 +1,7 @@
 package com.example.demo.data.model;
 
+import java.time.Instant;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +25,12 @@ public class Customer {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
     @Column(name = "company_name", nullable = false)
     private String companyName;
+
+    @Column(name = "created_at")
+    private Instant createdAt = Instant.now();
 }
