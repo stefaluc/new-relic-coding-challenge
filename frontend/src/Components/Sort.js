@@ -7,10 +7,10 @@ import { createSortOptions, SORT_LIMIT } from './util/sort';
 export default function Sort() {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [customerData, setCustomerData] = React.useState(null);
+
   const sortBy = searchParams.get("sortBy");
   const sortDir = searchParams.get("sortDir");
-
-  const [customerData, setCustomerData] = React.useState(null);
   const sortOptions = createSortOptions();
 
   React.useEffect(() => {

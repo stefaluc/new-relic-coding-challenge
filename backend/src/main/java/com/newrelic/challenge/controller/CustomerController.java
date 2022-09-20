@@ -1,17 +1,19 @@
-package com.example.demo.controller;
+package com.newrelic.challenge.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.data.model.Customer;
-import com.example.demo.service.CustomerService;
+import com.newrelic.challenge.data.model.Customer;
+import com.newrelic.challenge.service.CustomerService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CustomerController {
 
     private final CustomerService customerService;

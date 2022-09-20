@@ -1,4 +1,4 @@
-package com.example.demo.integration;
+package com.newrelic.challenge.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
@@ -22,12 +22,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.demo.DemoApplication;
-import com.example.demo.data.model.Customer;
-import com.example.demo.data.repository.CustomerRepository;
+import com.newrelic.challenge.Application;
+import com.newrelic.challenge.data.model.Customer;
+import com.newrelic.challenge.data.repository.CustomerRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DemoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureTestDatabase
 @AutoConfigureMockMvc
 public class CustomerIntegrationTest {
@@ -57,24 +57,33 @@ public class CustomerIntegrationTest {
     }
 
     @Test
-    public void testSearchCustomers_multiple() throws Exception {
+    public void testSearchCustomers() throws Exception {
         createTestCustomer("John", "Doe", "Test");
         createTestCustomer("Rob", "Lowe", "Test2");
+        createTestCustomer("Chris", "Doe", "Test2");
         mvc.perform(get("/customers?search=Doe")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.length()", is(2)))
+                .andExpect(jsonPath("$[0].lastName", is("Doe")));
+        mvc.perform(get("/customers?search=ob lo")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content()
+                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()", is(1)))
-                .andExpect(jsonPath("$[0].firstName", is("John")));
+                .andExpect(jsonPath("$[0].lastName", is("Lowe")));
     }
 
     @Test
     public void testSortCustomers() throws Exception {
         createTestCustomer("John", "Doe", "Test");
         createTestCustomer("Rob", "Lowe", "Test2");
-        mvc.perform(get("/customers?sortBy=lastNme&sortDir=desc")
+        mvc.perform(get("/customers?sortBy=lastName&sortDir=desc")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())

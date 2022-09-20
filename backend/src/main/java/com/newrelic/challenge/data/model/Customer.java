@@ -1,4 +1,4 @@
-package com.example.demo.data.model;
+package com.newrelic.challenge.data.model;
 
 import java.time.Instant;
 

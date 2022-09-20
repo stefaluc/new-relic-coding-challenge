@@ -4,11 +4,11 @@ import { Link, useSearchParams } from 'react-router-dom';
 import * as apiRoutes from './util/api-routes';
 
 export default function Search() {
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  let query = searchParams.get("search");
+  const [searchData, setSearchData] = React.useState(null);
 
-  let [searchData, setSearchData] = React.useState(null);
+  const query = searchParams.get("search");
 
   React.useEffect(() => {
     let abortController = new AbortController();
@@ -34,8 +34,8 @@ export default function Search() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let formData = new FormData(event.currentTarget);
-    let newSearch = formData.get("query");
+    const formData = new FormData(event.currentTarget);
+    const newSearch = formData.get("query");
     if (!newSearch) return;
     setSearchParams({ search: newSearch });
   }

@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.newrelic.challenge.service;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.data.model.Customer;
-import com.example.demo.data.repository.CustomerRepository;
+import com.newrelic.challenge.data.model.Customer;
+import com.newrelic.challenge.data.repository.CustomerRepository;
 import com.github.javafaker.Faker;
 
 @Service

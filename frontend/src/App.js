@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Home from './components/Home';
 import NoMatch from './components/NoMatch';
@@ -10,7 +10,9 @@ export default function App() {
   return (
     <div>
       <h1>New Relic Coding Challenge</h1>
+
       <SeedDb />
+
       <br />
       <hr />
 
