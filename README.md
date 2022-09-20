@@ -36,6 +36,28 @@ npm run start
 ```
 Web page can be viewed from http://localhost:3000.
 
+## API Design
+
+- GET `/customers`
+- GET `/customers?search={query}`
+- GET `/customers?sortBy={firstName|lastName|customerName}&sortDir={asc|desc}`
+- POST `/customers/seedDb?numCustomers={numCustomers}`
+
+**Customer:**
+```json
+{
+  "id": 1,
+  "firstName": "Lucas",
+  "lastName": "Stefanski",
+  "companyName": "Dun & Bradstreet",
+  "createdAt": "2022-09-20T18:25:43.511Z"
+}
+```
+
+Future improvements would see a full RESTful implementation of the customer resource to be able to do any combination of CRUD operations on single or multiple customers.
+
+Additionally, a full filter/sorting/pagination design could be implemented e.g.:
+- GET `/customers?limit=5&offset=5&companyName=New%20Relic&sortBy=companyName&sortDir=asc`
 ## Considerations
 ### Technology
 Java + Spring + Postgres is a widely used backend stack choice. It allows for efficient scalability, structure, and support for the given use case. However, this tech stack should ideally be kept away from a serverless architecture as Spring experiences costly cold starts, and SQL databases may be overwhelmed by short-lived database connections from serverless functions in high-volume instances. A monorepo can be maintained until the business use cases are well understood and then can be broken out into a microservice architecture.
