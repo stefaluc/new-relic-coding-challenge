@@ -3,17 +3,19 @@
 Assumes installation of [Docker](https://docs.docker.com/engine/install/).
 
 Start application:
-```console
+```shell
+./mvnw clean package -DskipTests
+cp target/challenge-0.0.1-SNAPSHOP.jar src/main/docker
 cd backend/src/main/docker
 docker-compose up
 ```
 Application can be queried from http://localhost:8080.
 #### Run Tests:
-```console
+```shell
 ./mvnw test
 ```
 #### Update Docker image:
-```console
+```shell
 ./mvnw clean package -DskipTests
 cp target/challenge-0.0.1-SNAPSHOP.jar src/main/docker
 cd backend/src/main/docker
@@ -25,7 +27,7 @@ docker-compose up
 Assumes installation of [Node.js](https://nodejs.org/en/download/) and a running backend.
 
 Start application:
-```console
+```shell
 cd frontend
 npm install
 npm run start
