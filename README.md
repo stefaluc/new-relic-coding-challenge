@@ -4,9 +4,10 @@ Assumes installation of [Docker](https://docs.docker.com/engine/install/).
 
 Start application:
 ```shell
+cd backend
 ./mvnw clean package -DskipTests
-cp target/challenge-0.0.1-SNAPSHOP.jar src/main/docker
-cd backend/src/main/docker
+cp target/challenge-0.0.1-SNAPSHOT.jar src/main/docker
+cd src/main/docker
 docker-compose up
 ```
 Application can be queried from http://localhost:8080.
@@ -16,9 +17,10 @@ Application can be queried from http://localhost:8080.
 ```
 #### Update Docker image:
 ```shell
+cd backend
 ./mvnw clean package -DskipTests
 cp target/challenge-0.0.1-SNAPSHOP.jar src/main/docker
-cd backend/src/main/docker
+cd src/main/docker
 docker-compose down
 docker rmi docker-spring-boot-postgres:latest
 docker-compose up
